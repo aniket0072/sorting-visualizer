@@ -261,6 +261,109 @@ async function quickSort(arr , low , high)
     }
 }
 
+document.getElementById("mergeSort").addEventListener("click", pseudomergeSort);
+
+async function merge(arr, l, m, r)
+{
+    var delaySpeed=100;
+    var n1 = m - l + 1;
+    var n2 = r - m;
+    // Create temp arrays
+    var L = new Array(n1); 
+    var R = new Array(n2);
+  
+    // Copy data to temp arrays L[] and R[]
+    for (var i = 0; i < n1; i++){
+        L[i] = arr[l + i];
+      //  console.log(arr[l+i],L[i]);
+    }
+    for (var j = 0; j < n2; j++)
+        R[j] = arr[m + 1 + j];
+    var i = 0;
+  
+    // Initial index of second subarray
+    var j = 0;
+  
+    // Initial index of merged subarray
+    var k = l;
+  
+    while (i < n1 && j < n2) {
+        if (L[i] <= R[j]) {
+           arr[k] = L[i];
+            let e1 = document.getElementById(`bar${k}`);
+            e1.style.height = `${L[i]}px`;
+            e1.style.backgroundColor = "red";
+            await new Promise(resolve => setTimeout(() => {
+                resolve(), delaySpeed
+            }));
+            e1.style.backgroundColor = "yellow";
+            i++;
+        }
+        else {
+           arr[k] = R[j];
+          let e1 = document.getElementById(`bar${k}`);
+          e1.style.height = `${R[j]}px`;
+          e1.style.backgroundColor = "red";
+          await new Promise(resolve => setTimeout(() => {
+              resolve(), delaySpeed
+          }));
+          e1.style.backgroundColor = "yellow";
+            j++;
+        }
+        k++;
+    }
+
+    while (i < n1) {
+      arr[k] = L[i];
+        let e1 = document.getElementById(`bar${k}`);
+            e1.style.height = `${L[i]}px`;
+            e1.style.backgroundColor = "red";
+            await new Promise(resolve => setTimeout(() => {
+                resolve(), delaySpeed
+            }));
+            e1.style.backgroundColor = "yellow";
+        i++;
+        k++;
+    }
+    while (j < n2) {
+       arr[k] = R[j];
+      let e1 = document.getElementById(`bar${k}`);
+      e1.style.height = `${R[j]}px`;
+      console.log(R[j],e1.style.height);
+      e1.style.backgroundColor = "red";
+      await new Promise(resolve => setTimeout(() => {
+          resolve(), delaySpeed
+      }));
+      e1.style.backgroundColor = "yellow";
+        j++;
+        k++;
+    }
+}
+async function pseudomergeSort(){
+    var delaySpeed=100;
+    var arr_size = document.querySelector("#arr_sz");
+    var no_of_bar = arr_size.value;
+    console.log(no_of_bar);
+  await  mergeSort(arr,0,no_of_bar-1);
+
+  var i=0;
+  for (i = 0; i < no_of_bar; i++) {
+      console.log(i);
+      let e1 = document.getElementById(`bar${i}`);
+      e1.style.backgroundColor = "#00FF7F";
+  }
+}
+async function mergeSort(arr,l, r){
+    if(l>=r){
+        return;//returns recursively
+    }
+    var m =l+ parseInt((r-l)/2);
+    //console.log(m);
+  await  mergeSort(arr,l,m);
+   await  mergeSort(arr,m+1,r);
+    await merge(arr,l,m,r);
+}
+
 function randomIntFromInterval(min, max) { // min and max included 
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
