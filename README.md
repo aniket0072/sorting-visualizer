@@ -25,8 +25,10 @@ This project turned out to be a great way to achieve both of the aforementioned 
  Guide to use-
 </h3>    
 Generate new Array- It generates a new array using Math.random function.
+<br>
 No.of bars -It changes the no. of bars you want to sort.
-There are 5 sorting algorithms mentioned .We can choose any one of them to sort our array.
+<br>
+There are 5 sorting algorithms mentioned .We can choose any one of them to sort our array.<br>
 There are animations involved like when we are comparing two values they both turn red and when the value is at 
 its correct positionit turns to green.
 
